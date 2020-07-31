@@ -15,8 +15,23 @@ class FoodDeliveryApp extends StatelessWidget{
     return MaterialApp(
       title: appTitle,
       home: SplashPage(),
+      theme: ThemeData(
+        // for colors: https://material.io/design/color/the-color-system.html#color-usage-and-palettes
+        primaryColor: Colors.amber[500],
+        accentColor: Colors.amber[200],
+        primaryColorDark: Colors.amber[900],
+        brightness: Brightness.light,
+        fontFamily: 'Georgia',
+        textTheme: TextTheme(
+          headline1: TextStyle(
+            fontSize: 16.0,
+            fontWeight: FontWeight.bold,
+            fontStyle: FontStyle.italic,
+            fontFamily: 'Hind'
+          )
+        )
+      ),
     );
-
   }
 
 }
