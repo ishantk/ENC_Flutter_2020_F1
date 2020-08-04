@@ -1,3 +1,5 @@
+import 'package:enc_flutter_2020_f1/tutorials/appbar.dart';
+import 'package:enc_flutter_2020_f1/tutorials/bottom-navigation.dart';
 import 'package:enc_flutter_2020_f1/tutorials/home-page.dart';
 import 'package:enc_flutter_2020_f1/tutorials/snackbar.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +19,9 @@ class SplashPage extends StatelessWidget{
             context,
             MaterialPageRoute(
               //builder: (context) => HomePage(),
-              builder: (context) => SnackBarPage(),
+              //builder: (context) => SnackBarPage(),
+              //builder: (context) => HomePageWithAppBar(),
+              builder: (context) => HomePageWithBottomNav(),
             )
           );
         }
