@@ -1,6 +1,8 @@
 import 'package:enc_flutter_2020_f1/tutorials/appbar.dart';
 import 'package:enc_flutter_2020_f1/tutorials/bottom-navigation.dart';
+import 'package:enc_flutter_2020_f1/tutorials/covid-list-hardcoded.dart';
 import 'package:enc_flutter_2020_f1/tutorials/home-page.dart';
+import 'package:enc_flutter_2020_f1/tutorials/listview.dart';
 import 'package:enc_flutter_2020_f1/tutorials/snackbar.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +23,9 @@ class SplashPage extends StatelessWidget{
               //builder: (context) => HomePage(),
               //builder: (context) => SnackBarPage(),
               //builder: (context) => HomePageWithAppBar(),
-              builder: (context) => HomePageWithBottomNav(),
+              //builder: (context) => HomePageWithBottomNav(),
+              //builder: (context) => NewsListPage(),
+              builder: (context) => CovidCaseListPage(),
             )
           );
         }
