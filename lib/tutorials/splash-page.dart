@@ -3,6 +3,7 @@ import 'package:enc_flutter_2020_f1/tutorials/bottom-navigation.dart';
 import 'package:enc_flutter_2020_f1/tutorials/covid-list-hardcoded.dart';
 import 'package:enc_flutter_2020_f1/tutorials/home-page.dart';
 import 'package:enc_flutter_2020_f1/tutorials/listview.dart';
+import 'package:enc_flutter_2020_f1/tutorials/navigation.dart';
 import 'package:enc_flutter_2020_f1/tutorials/snackbar.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,7 @@ class SplashPage extends StatelessWidget{
         Duration(seconds: 3),
         (){ // Anonymous Function | after 3 seconds, this function will be automatically executed
           //Navigator.push(
-          Navigator.pushReplacement(
+          /*Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               //builder: (context) => HomePage(),
@@ -25,9 +26,17 @@ class SplashPage extends StatelessWidget{
               //builder: (context) => HomePageWithAppBar(),
               //builder: (context) => HomePageWithBottomNav(),
               //builder: (context) => NewsListPage(),
-              builder: (context) => CovidCaseListPage(),
+              //builder: (context) => CovidCaseListPage(),
+              builder: (context) => PageOne(),
             )
-          );
+          );*/
+
+          //Navigator.pushNamed(context, "/page");
+          //Navigator.pushReplacementNamed(context, "/page");
+          //Navigator.pushReplacementNamed(context, "/country");
+          Navigator.pushReplacementNamed(context, "/newslist");
+          //Navigator.of(context).pushReplacementNamed("/page");
+
         }
     );
 
