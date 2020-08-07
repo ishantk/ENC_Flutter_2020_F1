@@ -34,7 +34,8 @@ class SplashPage extends StatelessWidget{
           //Navigator.pushNamed(context, "/page");
           //Navigator.pushReplacementNamed(context, "/page");
           //Navigator.pushReplacementNamed(context, "/country");
-          Navigator.pushReplacementNamed(context, "/newslist");
+          //Navigator.pushReplacementNamed(context, "/newslist");
+          Navigator.pushReplacementNamed(context, "/register");
           //Navigator.of(context).pushReplacementNamed("/page");
 
         }

@@ -1,8 +1,10 @@
 import 'package:enc_flutter_2020_f1/tutorials/covid-list-hardcoded.dart';
+import 'package:enc_flutter_2020_f1/tutorials/details-user.dart';
 import 'package:enc_flutter_2020_f1/tutorials/listview.dart';
 import 'package:enc_flutter_2020_f1/tutorials/navigation-backward-passing-data.dart';
 import 'package:enc_flutter_2020_f1/tutorials/navigation-forward-passing-data.dart';
 import 'package:enc_flutter_2020_f1/tutorials/navigation.dart';
+import 'package:enc_flutter_2020_f1/tutorials/register-user.dart';
 import 'package:enc_flutter_2020_f1/tutorials/splash-page.dart';
 import 'package:flutter/material.dart';
 
@@ -31,6 +33,8 @@ class FoodDeliveryApp extends StatelessWidget{
         "/pagetwo":(context) => PageTwo(),
         "/country":(context) => CountryPage(),
         "/newslist":(context) => NewsList(),
+        "/register":(context) => RegisterPage(),
+        "/details":(context) => ConfirmUserDetails(),
       },
 
       initialRoute: "/",
