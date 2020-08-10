@@ -1,3 +1,5 @@
+import 'package:enc_flutter_2020_f1/tutorials/card-widget.dart';
+import 'package:enc_flutter_2020_f1/tutorials/container-widget.dart';
 import 'package:enc_flutter_2020_f1/tutorials/covid-list-hardcoded.dart';
 import 'package:enc_flutter_2020_f1/tutorials/details-user.dart';
 import 'package:enc_flutter_2020_f1/tutorials/listview.dart';
@@ -35,6 +37,8 @@ class FoodDeliveryApp extends StatelessWidget{
         "/newslist":(context) => NewsList(),
         "/register":(context) => RegisterPage(),
         "/details":(context) => ConfirmUserDetails(),
+        "/container":(context) => ContainerWidget(),
+        "/card":(context) => CardWidget(),
       },
 
       initialRoute: "/",

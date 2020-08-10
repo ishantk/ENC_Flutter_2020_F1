@@ -50,6 +50,10 @@ flutter:
   assets:
      - assets/app_icon.png
      - assets/virus.png
+     - assets/bill.png
+     - assets/larry.png
+     - assets/steve.png
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
