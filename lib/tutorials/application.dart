@@ -2,6 +2,8 @@ import 'package:enc_flutter_2020_f1/tutorials/card-widget.dart';
 import 'package:enc_flutter_2020_f1/tutorials/container-widget.dart';
 import 'package:enc_flutter_2020_f1/tutorials/covid-list-hardcoded.dart';
 import 'package:enc_flutter_2020_f1/tutorials/details-user.dart';
+import 'package:enc_flutter_2020_f1/tutorials/gesture-detector.dart';
+import 'package:enc_flutter_2020_f1/tutorials/list-and-grid.dart';
 import 'package:enc_flutter_2020_f1/tutorials/listview.dart';
 import 'package:enc_flutter_2020_f1/tutorials/navigation-backward-passing-data.dart';
 import 'package:enc_flutter_2020_f1/tutorials/navigation-forward-passing-data.dart';
@@ -39,6 +41,8 @@ class FoodDeliveryApp extends StatelessWidget{
         "/details":(context) => ConfirmUserDetails(),
         "/container":(context) => ContainerWidget(),
         "/card":(context) => CardWidget(),
+        "/gridlist":(context) => GridListPage(),
+        "/gesture":(context) => GesturePage(),
       },
 
       initialRoute: "/",
