@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 /*
 Future<String> fetchNews() async {
@@ -118,6 +119,8 @@ class NewsAPIPage extends StatelessWidget{
   }
 }
 
+/*
+
 class NewsAPIList extends StatelessWidget{
 
   List<News> news;
@@ -143,6 +146,75 @@ class NewsAPIList extends StatelessWidget{
   }
 }
 
+*/
+
+class NewsAPIList extends StatelessWidget{
+
+  List<News> news;
+
+  NewsAPIList({Key key, @required this.news}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.separated(
+      itemCount: news.length,
+      itemBuilder: (context, index) {
+
+        return InkWell(
+          child: Card(
+            margin: EdgeInsets.all(8.0),
+            child: Container(
+              padding: EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Image.network(news[index].urlToImage),
+                  SizedBox(height: 6.0,),
+                  Divider(),
+                  SizedBox(height: 6.0,),
+                  Text(news[index].title, style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.black), ),
+                  Divider(),
+                  Text(news[index].author, style: TextStyle(fontSize: 18.0, color: Colors.amber)),
+                  Text(news[index].description),
+                  Divider(),
+                  Text(news[index].publishedAt, style: TextStyle(fontSize: 18.0, color: Colors.blueGrey)),
+                ],
+              ),
+            ),
+          ),
+          onTap: (){
+            MaterialPageRoute route = MaterialPageRoute(builder: (context) => NewsWebPage(url: news[index].url),);
+            Navigator.push(context, route);
+          },
+        );
+
+      },
+      separatorBuilder: (context, index) {
+        return Divider();
+      },
+
+    );
+  }
+}
+
+class NewsWebPage extends StatelessWidget{
+
+  String url;
+
+  NewsWebPage({Key key, @required this.url}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("News Web Page"),
+      ),
+      body: WebView(
+        initialUrl: url,
+        javascriptMode: JavascriptMode.unrestricted,
+      ),
+    );
+  }
+}
 
 class News{
 
