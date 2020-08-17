@@ -7,6 +7,7 @@ import 'package:enc_flutter_2020_f1/tutorials/json-parsing.dart';
 import 'package:enc_flutter_2020_f1/tutorials/list-and-grid.dart';
 import 'package:enc_flutter_2020_f1/tutorials/listview.dart';
 import 'package:enc_flutter_2020_f1/tutorials/navigation-backward-passing-data.dart';
+import 'package:enc_flutter_2020_f1/tutorials/navigation-drawer.dart';
 import 'package:enc_flutter_2020_f1/tutorials/navigation-forward-passing-data.dart';
 import 'package:enc_flutter_2020_f1/tutorials/navigation.dart';
 import 'package:enc_flutter_2020_f1/tutorials/network-requests-with-header.dart';
@@ -47,6 +48,7 @@ class FoodDeliveryApp extends StatelessWidget{
         "/gesture":(context) => GesturePage(),
         "/json":(context) => NewsAPIPage(),
         "/zomato":(context) => ZomatoCuisinesPage(),
+        "/navdrawer":(context) => NavigationDrawerPage(),
       },
 
       initialRoute: "/",
