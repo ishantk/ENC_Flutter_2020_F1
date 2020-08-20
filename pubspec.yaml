@@ -31,6 +31,9 @@ dependencies:
   characters: ^1.0.0
   webview_flutter: ^0.3.22+1 # https://pub.dev/packages/webview_flutter/install
   http: ^0.12.2              # https://pub.dev/packages/http/
+  camera: ^0.5.8+5
+  path: ^1.7.0
+  path_provider: ^1.6.11
 
 dev_dependencies:
   flutter_test:
