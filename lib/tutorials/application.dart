@@ -1,6 +1,9 @@
+import 'package:enc_flutter_2020_f1/tutorials/banner.dart';
 import 'package:enc_flutter_2020_f1/tutorials/card-widget.dart';
 import 'package:enc_flutter_2020_f1/tutorials/container-widget.dart';
 import 'package:enc_flutter_2020_f1/tutorials/covid-list-hardcoded.dart';
+import 'package:enc_flutter_2020_f1/tutorials/custom-theme.dart';
+import 'package:enc_flutter_2020_f1/tutorials/datatable.dart';
 import 'package:enc_flutter_2020_f1/tutorials/details-user.dart';
 import 'package:enc_flutter_2020_f1/tutorials/gesture-detector.dart';
 import 'package:enc_flutter_2020_f1/tutorials/json-parsing.dart';
@@ -49,9 +52,13 @@ class FoodDeliveryApp extends StatelessWidget{
         "/json":(context) => NewsAPIPage(),
         "/zomato":(context) => ZomatoCuisinesPage(),
         "/navdrawer":(context) => NavigationDrawerPage(),
+        "/banner":(context) => BannerPage(),
+        "/table":(context) => DataTablePage(),
       },
 
       initialRoute: "/",
+
+      //theme: buildThemeData(), // Customizing the Theme :)
 
       theme: ThemeData(
         // for colors: https://material.io/design/color/the-color-system.html#color-usage-and-palettes

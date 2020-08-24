@@ -9,8 +9,9 @@ import 'package:flutter/material.dart';
   runApp(app);
 }*/
 
-//void main() => runApp(FoodDeliveryApp());
+void main() => runApp(FoodDeliveryApp());
 
+/*
 Future<void> main() async{
 
   // till time services within plugins are not initialized dont move further
@@ -33,4 +34,4 @@ Future<void> main() async{
 
   runApp(app);
 
-}
+}*/
