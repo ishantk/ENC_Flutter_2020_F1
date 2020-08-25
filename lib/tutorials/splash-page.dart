@@ -43,7 +43,8 @@ class SplashPage extends StatelessWidget{
           //Navigator.pushReplacementNamed(context, "/zomato");
           //Navigator.pushReplacementNamed(context, "/navdrawer");
           //Navigator.pushReplacementNamed(context, "/banner");
-          Navigator.pushReplacementNamed(context, "/table");
+          //Navigator.pushReplacementNamed(context, "/table");
+          Navigator.pushReplacementNamed(context, "/animation");
 
         }
     );

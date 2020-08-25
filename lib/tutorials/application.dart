@@ -1,3 +1,4 @@
+import 'package:enc_flutter_2020_f1/tutorials/animations.dart';
 import 'package:enc_flutter_2020_f1/tutorials/banner.dart';
 import 'package:enc_flutter_2020_f1/tutorials/card-widget.dart';
 import 'package:enc_flutter_2020_f1/tutorials/container-widget.dart';
@@ -54,6 +55,7 @@ class FoodDeliveryApp extends StatelessWidget{
         "/navdrawer":(context) => NavigationDrawerPage(),
         "/banner":(context) => BannerPage(),
         "/table":(context) => DataTablePage(),
+        "/animation":(context) => AnimationPage(),
       },
 
       initialRoute: "/",
