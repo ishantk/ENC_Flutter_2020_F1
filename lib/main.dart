@@ -1,15 +1,20 @@
-import 'package:camera/camera.dart';
-import 'package:enc_flutter_2020_f1/tutorials/application.dart';
-import 'package:enc_flutter_2020_f1/tutorials/capture-image.dart';
-import 'package:flutter/cupertino.dart';
+//import 'package:camera/camera.dart';
+//import 'package:enc_flutter_2020_f1/tutorials/application.dart';
+//import 'package:enc_flutter_2020_f1/tutorials/capture-image.dart';
+//import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
+
+import 'package:enc_flutter_2020_f1/auth/food-delivery-app.dart';
+
+void main() => runApp(FoodDeliveryApp());
 
 /*void main() {
   FoodDeliveryApp app = FoodDeliveryApp();
   runApp(app);
 }*/
 
-void main() => runApp(FoodDeliveryApp());
+//void main() => runApp(FoodDeliveryApp());
 
 /*
 Future<void> main() async{
