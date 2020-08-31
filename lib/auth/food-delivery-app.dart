@@ -10,7 +10,7 @@ class FoodDeliveryApp extends StatelessWidget{
   Widget build(BuildContext context) {
 
     return MaterialApp(
-      title: Constants.APP_NAME,
+      title: Constants.choice["APP_TITLE"],
 
       // App Routing, we define the routes which identifies the pages in our App
       routes: {

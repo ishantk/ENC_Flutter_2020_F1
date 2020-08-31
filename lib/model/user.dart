@@ -9,5 +9,4 @@ class User{
   String password;
   List<Address> addresses;
 
-
 }
