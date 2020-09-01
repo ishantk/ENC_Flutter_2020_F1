@@ -26,7 +26,10 @@ class _SignInPageState extends State<SignInPage> {
     super.initState();
 
     Utils.isInternetConnected().then((bool value) {
-      internet = value;
+      print("Boolean Internet State is: $value");
+      setState(() {
+        internet = value;
+      });
     });
   }
 
@@ -40,86 +43,92 @@ class _SignInPageState extends State<SignInPage> {
             ? Form(
                 key: formKey,
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 6.0,
-                      ),
-                      Icon(Icons.local_bar),
-                      SizedBox(
-                        height: 2.0,
-                      ),
-                      Text(Constants.choice["LOGIN_TITLE"]),
-                      SizedBox(
-                        height: 2.0,
-                      ),
-                      TextFormField(
-                        decoration: InputDecoration(
-                          labelText: "Enter Email",
-                        ),
-                        controller: emailController,
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return "Please Enter Email"; // return error message
-                          } else {
-                            if (!value.contains("@") && !value.contains(".")) {
-                              // implement regex to check if email is correctly enetered or not
-                              return "Email is not Valid";
-                            }
-                          }
-                          return null; // here no error message
-                        },
-                      ),
-                      TextFormField(
-                        decoration: InputDecoration(
-                          labelText: "Enter Password",
-                        ),
-                        controller: passwordController,
-                        obscureText: true,
-                        // Implement a functionality in the right of TextFormField to show/hide the Password
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return "Please Enter Password"; // return error message
-                          } else {
-                            if (value.length <= 5) {
-                              return "Password should be min 6 characters";
-                            }
-                          }
-                          return null; // here no error message
-                        },
-                      ),
-                      Container(
-                        padding: const EdgeInsets.all(16.0),
-                        alignment: Alignment.center,
-                        child: RaisedButton(
-                          child: Text("LOGIN"),
-                          onPressed: () async{
-                            if (formKey.currentState.validate()) {
-                              // if no errors :)
-                              User user = await loginUser(emailController.text, passwordController.text);
-                              if(user!=null){
-                                  // Login is a Success
-                                print("Login Success");
-                              }else{
-                                  // Login is a Failure
-                                print("Login Failed");
+                    padding: const EdgeInsets.all(16.0),
+                    child: Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          SizedBox(
+                            height: 6.0,
+                          ),
+                          Icon(Icons.local_bar),
+                          SizedBox(
+                            height: 2.0,
+                          ),
+                          Text(Constants.choice["LOGIN_TITLE"]),
+                          SizedBox(
+                            height: 2.0,
+                          ),
+                          TextFormField(
+                            decoration: InputDecoration(
+                              labelText: "Enter Email",
+                            ),
+                            controller: emailController,
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return "Please Enter Email"; // return error message
+                              } else {
+                                if (!value.contains("@") &&
+                                    !value.contains(".")) {
+                                  // implement regex to check if email is correctly enetered or not
+                                  return "Email is not Valid";
+                                }
                               }
-                            }
-                          },
-                        ),
+                              return null; // here no error message
+                            },
+                          ),
+                          TextFormField(
+                            decoration: InputDecoration(
+                              labelText: "Enter Password",
+                            ),
+                            controller: passwordController,
+                            obscureText: true,
+                            // Implement a functionality in the right of TextFormField to show/hide the Password
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return "Please Enter Password"; // return error message
+                              } else {
+                                if (value.length <= 5) {
+                                  return "Password should be min 6 characters";
+                                }
+                              }
+                              return null; // here no error message
+                            },
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(16.0),
+                            alignment: Alignment.center,
+                            child: RaisedButton(
+                              child: Text("LOGIN"),
+                              onPressed: () async {
+                                if (formKey.currentState.validate()) {
+                                  // if no errors :)
+                                  User user = await loginUser(
+                                      emailController.text,
+                                      passwordController.text);
+
+                                  if (user.uid.isNotEmpty) {
+                                    // Login is a Success
+                                    print("Login Success");
+                                    Navigator.pushReplacementNamed(context, "/home");
+                                  } else {
+                                    // Login is a Failure
+                                    print("Login Failed");
+                                  }
+                                }
+                              },
+                            ),
+                          ),
+                          FlatButton(
+                            child: Text("REGISTER HERE"),
+                            onPressed: () {
+                              Navigator.pushNamed(context, "/signup");
+                            },
+                          )
+                        ],
                       ),
-                      FlatButton(
-                        child: Text("REGISTER HERE"),
-                        onPressed: (){
-                          Navigator.pushNamed(context, "/signup");
-                        },
-                      )
-                    ],
-                  ),
-                ),
+                    )),
               )
             : Center(
                 child: Padding(
@@ -140,13 +149,15 @@ class _SignInPageState extends State<SignInPage> {
               )));
   }
 
-  Future<User> loginUser(String email, String password){
+  Future<User> loginUser(String email, String password) {
     FirebaseAuth auth = FirebaseAuth.instance;
-    auth.signInWithEmailAndPassword(email: email, password: password).then((UserCredential value){
+    auth
+        .signInWithEmailAndPassword(email: email, password: password)
+        .then((UserCredential value) {
       // User -> is from FirebaseAuth Library
       User user = value.user;
+      Utils.UID = user.uid; // We have now UID of the registered User
       return user;
     });
   }
-
 }

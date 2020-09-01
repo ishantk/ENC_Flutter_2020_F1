@@ -6,7 +6,30 @@ class User{
   String name;
   String phone;
   String email;
-  String password;
+  bool active;
+  String imageURL;
   List<Address> addresses;
+
+  // Default Constructor
+  User(){
+
+  }
+
+  // Named Constructor
+  User.init({this.name, this.phone, this.email, this.active, this.imageURL, this.addresses});
+
+
+  // toMap -> user defined function which returns a HashMap for the Object :)
+  Map<String, dynamic> toMap(){
+
+    return{
+      "name":name,
+      "phone": phone,
+      "email": email,
+      "active": active,
+      "imageURL": imageURL,
+      "addresses":addresses
+    };
+  }
 
 }

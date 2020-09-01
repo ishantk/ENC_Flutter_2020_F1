@@ -1,18 +1,40 @@
+import 'package:enc_flutter_2020_f1/util/utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 // Image References : https://www.flaticon.com/
+
+
+bool checkUserInFirebaseAuth() {
+  // In case user has logged in or registered, FirebaseAuth Module saves that information locally on the device as token
+  FirebaseAuth auth = FirebaseAuth.instance;
+  if(auth.currentUser != null) {
+    //Utils.UID = auth.currentUser.uid;
+    return true;
+  }else{
+    return false;
+  }
+}
+
+navigate(BuildContext context, String route){
+  Future.delayed(
+      Duration(seconds: 3),
+          (){
+        Navigator.pushReplacementNamed(context, route);
+      }
+  );
+}
 
 // Whenever we create object of StatelessWidget, build function is executed
 class AppSplashPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
 
-    Future.delayed(
-        Duration(seconds: 3),
-        (){
-          Navigator.pushReplacementNamed(context, "/signin");
-        }
-    );
+    if(checkUserInFirebaseAuth()){ // UID is not empty -> i.e. User has either logged in or registered
+      navigate(context, "/home");
+    }else{
+      navigate(context, "/signin");
+    }
 
     // Scaffold: a complete Full Screen UI Page
     // we can associate AppBar, TabBar, NavBar, BottomNavBars etc...

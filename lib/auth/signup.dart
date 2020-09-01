@@ -1,7 +1,11 @@
 import 'package:enc_flutter_2020_f1/constants/app-constants.dart';
+import 'package:enc_flutter_2020_f1/model/user.dart' as u; // alias name to the user.dart since we have same class in user.dart and also in firebase_auth.dart
 import 'package:enc_flutter_2020_f1/util/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+
+
 
 class SignUpPage extends StatefulWidget{
   createState()=>_SignUpPageState();
@@ -19,9 +23,11 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   void initState() {
     super.initState();
-
     Utils.isInternetConnected().then((bool value) {
-      internet = value;
+      print("Boolean Internet State is: $value");
+      setState(() {
+        internet = value;
+      });
     });
   }
 
@@ -36,7 +42,8 @@ class _SignUpPageState extends State<SignUpPage> {
           key: formKey,
           child: Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Column(
+            child: Expanded(
+              child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
@@ -104,20 +111,18 @@ class _SignUpPageState extends State<SignUpPage> {
                   child: RaisedButton(
                     child: Text("REGISTER"),
                     onPressed: () async{
+                      print("Registration Started");
                       if (formKey.currentState.validate()) {
                         // if no errors :)
-                        User user = await registerUser(emailController.text, passwordController.text);
-                        if(user!=null){
-                          // Register is a Success
-                          print("Registration Success");
-                        }else{
-                          print("Registration Failed");
-                        }
+                        String message = await registerUser(emailController.text, passwordController.text);
+                        print("Message is: $message");
                       }
                     },
                   ),
                 )
               ],
+            ),
+
             ),
           ),
         )
@@ -140,13 +145,29 @@ class _SignUpPageState extends State<SignUpPage> {
             )));
   }
 
-  Future<User> registerUser(String email, String password){
+  Future<String> registerUser(String email, String password) async{
     FirebaseAuth auth = FirebaseAuth.instance;
-    auth.createUserWithEmailAndPassword(email: email, password: password).then((UserCredential value){
-      // User -> is from FirebaseAuth Library
+    UserCredential value = await auth.createUserWithEmailAndPassword(email: email, password: password);
+    // User -> is from FirebaseAuth Library
+    if(value.user.uid.isNotEmpty) {
       User user = value.user;
-      return user;
-    });
+      Utils.UID = user.uid; // We have now UID of the registered User
+      u.User uRef = u.User.init(
+          name: nameController.text, email: emailController.text, active: true);
+      String message = saveUserInFirestore(uRef);
+      print("Message: $message");
+      Navigator.pushReplacementNamed(context, "/home");
+      return "User Registered and Saved";
+    }else{
+      return "Something Went Wrong";
+    }
+  }
+
+  String saveUserInFirestore(u.User user){ // u.User means User class from user.dart and not from firebase_auth.dart
+    // we get the reference to the Cloud Firestore DataBase
+    FirebaseFirestore db = FirebaseFirestore.instance;
+    db.collection("users").doc(Utils.UID).set(user.toMap());
+    return "User Saved";
   }
 
 }
