@@ -25,4 +25,7 @@ class Constants{
   // Intial Value to Static Variable choice
   static var choice = english;
 
+  static const STUDENT_COLLECTION = "students";
+
+
 }

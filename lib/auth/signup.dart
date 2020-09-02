@@ -6,12 +6,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 
-
 class SignUpPage extends StatefulWidget{
   createState()=>_SignUpPageState();
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   TextEditingController nameController = TextEditingController();

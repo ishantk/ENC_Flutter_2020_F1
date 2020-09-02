@@ -9,7 +9,7 @@ bool checkUserInFirebaseAuth() {
   // In case user has logged in or registered, FirebaseAuth Module saves that information locally on the device as token
   FirebaseAuth auth = FirebaseAuth.instance;
   if(auth.currentUser != null) {
-    //Utils.UID = auth.currentUser.uid;
+    Utils.UID = auth.currentUser.uid;
     return true;
   }else{
     return false;

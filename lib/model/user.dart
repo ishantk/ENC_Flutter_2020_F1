@@ -11,9 +11,7 @@ class User{
   List<Address> addresses;
 
   // Default Constructor
-  User(){
-
-  }
+  User();
 
   // Named Constructor
   User.init({this.name, this.phone, this.email, this.active, this.imageURL, this.addresses});

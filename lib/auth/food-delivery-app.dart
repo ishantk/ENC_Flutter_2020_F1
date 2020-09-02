@@ -3,6 +3,7 @@ import 'package:enc_flutter_2020_f1/auth/signup.dart';
 import 'package:enc_flutter_2020_f1/auth/splash.dart';
 import 'package:enc_flutter_2020_f1/constants/app-constants.dart';
 import 'package:enc_flutter_2020_f1/home/home.dart';
+import 'package:enc_flutter_2020_f1/tutorials/firestore-operations.dart';
 import 'package:flutter/material.dart';
 
 class FoodDeliveryApp extends StatelessWidget{
@@ -18,7 +19,8 @@ class FoodDeliveryApp extends StatelessWidget{
         "/": (context) => AppSplashPage(),
         "/signin": (context) => SignInPage(),
         "/signup": (context) => SignUpPage(),
-        "/home": (context) => HomePage(),
+        "/home": (context) => FirestoreDBOperationsPage(),
+        //"/home": (context) => HomePage(),
       },
 
       initialRoute: "/",
