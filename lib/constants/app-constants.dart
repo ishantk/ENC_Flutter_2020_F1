@@ -26,6 +26,7 @@ class Constants{
   static var choice = english;
 
   static const STUDENT_COLLECTION = "students";
+  static const USERS_COLLECTION = "users";
 
 
 }

@@ -45,6 +45,12 @@ class Subject{
   Subject();
   Subject.init({this.name, this.marks});
 
+  /*
+  @factory
+  Subject.toObject(Map<String, dynamic> map){
+    Subject.init(name: map['name'], marks: map['marks']);
+  }*/
+
   Map<String, dynamic> toMap(){
     return {
       "name": name,

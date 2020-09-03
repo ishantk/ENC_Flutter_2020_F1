@@ -19,8 +19,8 @@ class FoodDeliveryApp extends StatelessWidget{
         "/": (context) => AppSplashPage(),
         "/signin": (context) => SignInPage(),
         "/signup": (context) => SignUpPage(),
-        "/home": (context) => FirestoreDBOperationsPage(),
-        //"/home": (context) => HomePage(),
+        //"/home": (context) => FirestoreDBOperationsPage(), // tutorial
+        "/home": (context) => HomePage(),
       },
 
       initialRoute: "/",
