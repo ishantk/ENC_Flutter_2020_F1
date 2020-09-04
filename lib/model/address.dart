@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Address{
 
   String adrsLine;
@@ -6,7 +8,7 @@ class Address{
   int zipCode;
   String label;
 
-  AddressGeoLocation location;
+  GeoPoint location;
 
   Address(){
 
@@ -21,27 +23,8 @@ class Address{
       "state":state,
       "zipCode": zipCode,
       "label":label,
-      "location": location.toMap(), // location is further a map
+      "location": location
     };
   }
 
-}
-
-class AddressGeoLocation{
-
-  double latitude;
-  double longitude;
-
-  AddressGeoLocation(){
-
-  }
-
-  AddressGeoLocation.init({this.latitude, this.longitude});
-
-  Map<String, dynamic> toMap(){
-    return{
-      "latitude":latitude,
-      "longitude": longitude
-    };
-  }
 }

@@ -109,7 +109,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
           subtitle: Text("Add or Remove Addresses"),
           trailing: Icon(Icons.keyboard_arrow_right),
           onTap: (){
-
+            Navigator.pushNamed(context, "/addresses");
           },
         ),
         ListTile(
