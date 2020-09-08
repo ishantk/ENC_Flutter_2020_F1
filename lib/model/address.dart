@@ -5,7 +5,7 @@ class Address{
   String adrsLine;
   String city;
   String state;
-  int zipCode;
+  String zipCode;
   String label;
 
   GeoPoint location;
