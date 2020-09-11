@@ -5,6 +5,7 @@ import 'package:enc_flutter_2020_f1/constants/app-constants.dart';
 import 'package:enc_flutter_2020_f1/home/home.dart';
 import 'package:enc_flutter_2020_f1/profile/user-addresses.dart';
 import 'package:enc_flutter_2020_f1/tutorials/firestore-operations.dart';
+import 'package:enc_flutter_2020_f1/tutorials/google-maps.dart';
 import 'package:flutter/material.dart';
 
 class FoodDeliveryApp extends StatelessWidget{
@@ -17,7 +18,8 @@ class FoodDeliveryApp extends StatelessWidget{
 
       // App Routing, we define the routes which identifies the pages in our App
       routes: {
-        "/": (context) => AppSplashPage(),
+        //"/": (context) => AppSplashPage(),
+        "/": (context) => MapSample(),
         "/signin": (context) => SignInPage(),
         "/signup": (context) => SignUpPage(),
         //"/home": (context) => FirestoreDBOperationsPage(), // tutorial
