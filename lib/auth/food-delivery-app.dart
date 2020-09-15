@@ -18,8 +18,8 @@ class FoodDeliveryApp extends StatelessWidget{
 
       // App Routing, we define the routes which identifies the pages in our App
       routes: {
+        "/": (context) => GoogleMapsPage(),
         //"/": (context) => AppSplashPage(),
-        "/": (context) => MapSample(),
         "/signin": (context) => SignInPage(),
         "/signup": (context) => SignUpPage(),
         //"/home": (context) => FirestoreDBOperationsPage(), // tutorial

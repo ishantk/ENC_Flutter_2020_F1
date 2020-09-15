@@ -4,28 +4,47 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 
-class MapSample extends StatefulWidget {
+
+class GoogleMapsPage extends StatefulWidget {
   @override
-  State<MapSample> createState() => MapSampleState();
+  _GoogleMapsPageState createState() => _GoogleMapsPageState();
 }
 
-class MapSampleState extends State<MapSample> {
+class _GoogleMapsPageState extends State<GoogleMapsPage> {
 
   Completer<GoogleMapController> _controller = Completer();
 
-  static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
+  static final CameraPosition initialCameraPosition = CameraPosition(
+    // Initial Delhi LatLong
+    target: LatLng(28.6472799,76.8130694),
+    zoom: 12.0,
   );
 
-  static CameraPosition _kLake = CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng(37.43296265331129, -122.08832357078792),
-      tilt: 59.440717697143555,
-      zoom: 19.151926040649414);
+  CameraPosition currentCameraPosition;
 
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      body: GoogleMap(
+        mapType: MapType.normal,
+        initialCameraPosition: initialCameraPosition,
+        onMapCreated: (GoogleMapController controller) {
+          _controller.complete(controller);
+        },
+        zoomGesturesEnabled: true,
+        zoomControlsEnabled: true,
+        trafficEnabled: true,
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: fetchCurrentLocation,
+        label: Text('My Location'),
+        icon: Icon(Icons.gps_fixed),
+      ),
+    );
+  }
 
-  fetchCurrentLocation() async {
+  Future<void> fetchCurrentLocation() async {
+
     Location location = new Location();
     bool _serviceEnabled;
     PermissionStatus _permissionGranted;
@@ -53,39 +72,18 @@ class MapSampleState extends State<MapSample> {
 
     _locationData = await location.getLocation();
 
-
-    _kLake = CameraPosition(
-        bearing: 192.8334901395799,
-        target: LatLng(_locationData.latitude, _locationData.longitude),
-        tilt: 59.440717697143555,
-        zoom: 19.151926040649414);
-
-
-    _goToTheLake();
-
-  }
-
-
-  @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-      body: GoogleMap(
-        mapType: MapType.normal,
-        initialCameraPosition: _kGooglePlex,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: fetchCurrentLocation,
-        label: Text('To the lake!'),
-        icon: Icon(Icons.directions_boat),
-      ),
+    currentCameraPosition = CameraPosition(
+    // Current LatLong
+    target: LatLng(_locationData.latitude, _locationData.longitude),
+    zoom: 12.0,
     );
+
+    final GoogleMapController controller = await _controller.future;
+    controller.animateCamera(CameraUpdate.newCameraPosition(currentCameraPosition));
   }
 
-  Future<void> _goToTheLake() async {
-    final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
-  }
 }
+
+// Assignment:
+// 1. Create Markers on Google Maps
+// 2. In the AppBar Create a PopUpMenu where we can switch different types of maps
