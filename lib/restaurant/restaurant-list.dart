@@ -15,8 +15,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
     FirebaseFirestore db = FirebaseFirestore.instance;
     CollectionReference collectionRestaurants = db.collection(Constants.RESTAURANT_COLLECTION);
 
-    return Scaffold(
-      body: StreamBuilder<QuerySnapshot>(
+    return StreamBuilder<QuerySnapshot>(
         stream: collectionRestaurants.snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
 
@@ -71,9 +70,7 @@ class _RestaurantPageState extends State<RestaurantPage> {
             }).toList(),
           );
 
-
         },
-      ),
-    );
+      );
   }
 }

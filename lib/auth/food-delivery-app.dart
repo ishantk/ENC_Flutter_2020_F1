@@ -2,7 +2,7 @@ import 'package:enc_flutter_2020_f1/auth/signin.dart';
 import 'package:enc_flutter_2020_f1/auth/signup.dart';
 import 'package:enc_flutter_2020_f1/auth/splash.dart';
 import 'package:enc_flutter_2020_f1/constants/app-constants.dart';
-import 'package:enc_flutter_2020_f1/home/home-with-filters.dart';
+import 'package:enc_flutter_2020_f1/home/home-filters.dart';
 import 'package:enc_flutter_2020_f1/home/home.dart';
 import 'package:enc_flutter_2020_f1/profile/user-addresses.dart';
 import 'package:enc_flutter_2020_f1/tutorials/firestore-operations.dart';
@@ -24,8 +24,7 @@ class FoodDeliveryApp extends StatelessWidget{
         "/signin": (context) => SignInPage(),
         "/signup": (context) => SignUpPage(),
         //"/home": (context) => FirestoreDBOperationsPage(), // tutorial
-        //"/home": (context) => HomePage(),
-        "/home": (context) => HomePageWithFilters(),
+        "/home": (context) => HomePage(),
         "/addresses": (context) => AddressesPage(),
       },
 

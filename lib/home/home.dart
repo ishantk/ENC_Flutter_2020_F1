@@ -1,3 +1,4 @@
+import 'package:enc_flutter_2020_f1/home/restaurants-home.dart';
 import 'package:enc_flutter_2020_f1/profile/user-profile.dart';
 import 'package:enc_flutter_2020_f1/restaurant/restaurant-list.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class _HomePageState extends State<HomePage>{
 
   List<Widget> widgets = [
     // 0
-    RestaurantPage(),
+    RestaurantsHomePage(),
     // 1
     Text("Search Something",
       style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold, fontStyle: FontStyle.italic),),
