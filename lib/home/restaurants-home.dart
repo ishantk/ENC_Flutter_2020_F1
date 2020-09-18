@@ -12,6 +12,7 @@ class _RestaurantsHomePageState extends State<RestaurantsHomePage> {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      scrollDirection: Axis.vertical,
       padding: EdgeInsets.all(16.0),
       children: [
         Container(

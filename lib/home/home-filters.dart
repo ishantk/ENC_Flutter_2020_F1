@@ -10,15 +10,12 @@ class HomeFilters extends StatefulWidget {
 class _HomeFiltersState extends State<HomeFilters> {
   @override
   Widget build(BuildContext context) {
-
-    return ListView(
-      padding: EdgeInsets.all(16.0),
-      scrollDirection: Axis.vertical,
-      children: [
+    return
         Container(
           padding: EdgeInsets.all(8.0),
           height: 80,
           child: ListView(
+            shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             padding: EdgeInsets.all(8.0),
             children: [
@@ -79,9 +76,7 @@ class _HomeFiltersState extends State<HomeFilters> {
               ),
               Padding(padding: EdgeInsets.all(6.0),),
             ],
-          ),
-        ),
-      ],
+          )
     );
   }
 }

@@ -44,7 +44,8 @@ class _RestaurantPageState extends State<RestaurantPage> {
 
           return ListView(
             shrinkWrap: true,
-            padding: EdgeInsets.all(16.0),
+            physics: NeverScrollableScrollPhysics(),
+            padding: EdgeInsets.all(8.0),
             children: snapshot.data.docs.map((DocumentSnapshot document) {
               return InkWell(
                 child: Card(
