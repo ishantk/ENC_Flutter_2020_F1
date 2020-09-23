@@ -1,4 +1,5 @@
 import 'package:enc_flutter_2020_f1/home/restaurants-home.dart';
+import 'package:enc_flutter_2020_f1/profile/cart.dart';
 import 'package:enc_flutter_2020_f1/profile/user-profile.dart';
 import 'package:enc_flutter_2020_f1/restaurant/restaurant-list.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +34,16 @@ class _HomePageState extends State<HomePage>{
     return Scaffold(
       appBar: AppBar(
         title: Text("Home"),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.shopping_cart),
+            tooltip: "CART",
+            onPressed: (){
+              MaterialPageRoute route = MaterialPageRoute(builder: (context) => DishCartPage());
+              Navigator.push(context, route);
+            },
+          )
+        ],
       ),
       body: Center(
         child: widgets.elementAt(index),  // widgets[index]

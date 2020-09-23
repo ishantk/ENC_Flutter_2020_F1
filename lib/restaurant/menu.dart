@@ -159,6 +159,7 @@ class _RestaurantDishesState extends State<RestaurantDishes> {
                       dishData['quantity'] = 1;
                       dishData['restaurant'] = widget.restaurant['name'];
                       dishData['restaurantId'] = widget.restaurantID;
+                      dishData['totalPrice'] = widget.restaurant['menu'][index]['price'];
 
                       FirebaseFirestore db = FirebaseFirestore.instance;
                       db.collection(Constants.USERS_COLLECTION).doc(Utils.UID).collection(Constants.CART_COLLECTION).add(dishData)

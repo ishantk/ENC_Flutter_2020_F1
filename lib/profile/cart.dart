@@ -35,8 +35,6 @@ class _DishCartPageState extends State<DishCartPage> {
           }
 
           return ListView(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
             padding: EdgeInsets.all(8.0),
             children: snapshot.data.docs.map((DocumentSnapshot document) {
               return Card(
@@ -47,7 +45,9 @@ class _DishCartPageState extends State<DishCartPage> {
                       Image.network(document.data()['imageURL']),
                       SizedBox(height: 2.0,),
                       Text(document.data()['title'], style: TextStyle(fontSize: 24.0, color: Colors.amber),),
-                      Text(document.data()['price'].toString(), style: TextStyle(fontSize: 18.0, color: Colors.black),),
+                      Counter(quantity: document.data()['quantity'], dishPrice: document.data()['price'], docId: document.id),
+                      Text(document.data()['price'].toString(), style: TextStyle(fontSize: 16.0, color: Colors.blueGrey),),
+                      Text(document.data()['totalPrice'].toString(), style: TextStyle(fontSize: 20.0, color: Colors.black),),
                       Text(document.data()['description'], style: TextStyle(fontSize: 18.0, color: Colors.blueGrey),),
                       Divider(),
                       Text(document.data()['type'], style: TextStyle(fontSize: 20.0, color: Colors.blueGrey),),
@@ -63,3 +63,66 @@ class _DishCartPageState extends State<DishCartPage> {
     );
   }
 }
+
+class Counter extends StatefulWidget {
+
+  int quantity;
+  int dishPrice;
+  String docId;
+
+  Counter({Key key, @required this.quantity, @required this.dishPrice, @required this.docId}) : super(key: key);
+
+  @override
+  _CounterState createState() => _CounterState();
+}
+
+class _CounterState extends State<Counter> {
+
+  FirebaseFirestore db = FirebaseFirestore.instance;
+  
+  updateDishQuantityInFirestore(){
+    CollectionReference cart = db.collection(Constants.USERS_COLLECTION).doc(Utils.UID).collection(Constants.CART_COLLECTION);
+    cart.doc(widget.docId).update({"quantity": widget.quantity, "totalPrice":widget.quantity*widget.dishPrice}).then((value) {
+      // show some snackbar for update
+    });
+
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          FlatButton(
+            child: Text('-', style: TextStyle(fontSize: 20.0),),
+            onPressed: (){
+              setState(() {
+                if(widget.quantity>1){
+                  widget.quantity -= 1;
+                  updateDishQuantityInFirestore();
+                }
+              });
+            },
+          ),
+          Padding(padding: EdgeInsets.all(2.0),),
+          Text('${widget.quantity}', style: TextStyle(fontSize: 20.0),),
+          Padding(padding: EdgeInsets.all(2.0),),
+          FlatButton(
+            child: Text('+', style: TextStyle(fontSize: 20.0),),
+            onPressed: (){
+              setState(() {
+              if(widget.quantity<10) {
+                widget.quantity += 1;
+                updateDishQuantityInFirestore();
+              }
+              });
+            },
+          )
+        ],
+      ),
+    );
+  }
+}
+
