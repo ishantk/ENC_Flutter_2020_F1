@@ -29,6 +29,7 @@ class Constants{
   static const USERS_COLLECTION = "users";
   static const RESTAURANT_COLLECTION = "restaurants-angular";
   static const CART_COLLECTION = "cart";
+  static const ORDERS_COLLECTION = "orders";
 
 
 }

@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enc_flutter_2020_f1/constants/app-constants.dart';
+import 'package:enc_flutter_2020_f1/payments/razorpay.dart';
 import 'package:enc_flutter_2020_f1/util/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:enc_flutter_2020_f1/model/order.dart';
 
 class DishCartPage extends StatefulWidget {
   @override
@@ -9,10 +12,62 @@ class DishCartPage extends StatefulWidget {
 }
 
 class _DishCartPageState extends State<DishCartPage> {
+
+  FirebaseFirestore db = FirebaseFirestore.instance;
+
+  placeOrder(List<Map<String, dynamic>> dishes){
+
+    Order order = Order();
+    order.orderID = Utils.UID+"-"+DateTime.now().toString();
+    order.userID = Utils.UID;
+    order.restaurantID = dishes[0]['restaurantId'];
+    order.orderDateTime = DateTime.now();
+
+    order.totalPrice = 0;
+
+    for(int i=0;i<dishes.length;i++){
+      order.totalPrice += dishes[i]['totalPrice'];
+    }
+
+    order.dishes = dishes;
+
+
+    db.collection(Constants.ORDERS_COLLECTION).add(order.toMap()).then((value){
+
+      Fluttertoast.showToast(
+          msg: "Order Placed Successfully "+order.orderID,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 3,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0
+      );
+
+      // Initially Place the Order and afterwards clear the cart collection :)
+      removeDishesFromCart();
+
+    });
+
+  }
+
+  removeDishesFromCart(){
+    db.collection(Constants.USERS_COLLECTION).doc(Utils.UID).collection(Constants.CART_COLLECTION).get().then((QuerySnapshot querySnapshot){
+      List<QueryDocumentSnapshot> docs = querySnapshot.docs;
+      for(int i=0;i<docs.length;i++){
+        String docId = docs[i].id;
+        db.collection(Constants.USERS_COLLECTION).doc(Utils.UID).collection(Constants.CART_COLLECTION).doc(docId).delete();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     FirebaseFirestore db = FirebaseFirestore.instance;
     CollectionReference collectionRestaurants = db.collection(Constants.USERS_COLLECTION).doc(Utils.UID).collection(Constants.CART_COLLECTION);
+
+    int amount = 0;
+    List<Map<String, dynamic>> dishes = [];
 
     return Scaffold(
       appBar: AppBar(
@@ -37,6 +92,10 @@ class _DishCartPageState extends State<DishCartPage> {
           return ListView(
             padding: EdgeInsets.all(8.0),
             children: snapshot.data.docs.map((DocumentSnapshot document) {
+
+              amount += document.data()['totalPrice'];
+              dishes.add(document.data());
+
               return Card(
                 child: Container(
                   padding: EdgeInsets.all(8.0),
@@ -59,6 +118,31 @@ class _DishCartPageState extends State<DishCartPage> {
           );
 
         },
+      ),
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: RaisedButton(
+          child: Text("CONFIRM ORDER"),
+          onPressed: () async{
+            String message = await Navigator.push(context, MaterialPageRoute(builder: (context) => RazorPayCheckoutPage(amount: amount),));
+
+            if(message.contains("SUCCESS")){
+              placeOrder(dishes);
+            }else if(message.contains("WALLET")){
+              placeOrder(dishes);
+            }else{
+              Fluttertoast.showToast(
+                  msg: "Something Went Wrong: "+message,
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM,
+                  timeInSecForIosWeb: 3,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.white,
+                  fontSize: 16.0
+              );
+            }
+          }
+        ),
       ),
     );
   }
