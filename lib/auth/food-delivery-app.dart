@@ -4,6 +4,7 @@ import 'package:enc_flutter_2020_f1/auth/splash.dart';
 import 'package:enc_flutter_2020_f1/constants/app-constants.dart';
 import 'package:enc_flutter_2020_f1/home/home-filters.dart';
 import 'package:enc_flutter_2020_f1/home/home.dart';
+import 'package:enc_flutter_2020_f1/profile/add-user-addresses.dart';
 import 'package:enc_flutter_2020_f1/profile/user-addresses.dart';
 import 'package:enc_flutter_2020_f1/tutorials/firestore-operations.dart';
 import 'package:enc_flutter_2020_f1/tutorials/google-maps.dart';

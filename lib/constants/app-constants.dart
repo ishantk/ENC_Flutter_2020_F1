@@ -30,6 +30,10 @@ class Constants{
   static const RESTAURANT_COLLECTION = "restaurants-angular";
   static const CART_COLLECTION = "cart";
   static const ORDERS_COLLECTION = "orders";
+  static const CONFIG_COLLECTION = "config";
+
+
+  static const PAYMENT_OPTIONS_DOC = "payment-options";
 
 
 }

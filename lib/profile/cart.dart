@@ -1,12 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enc_flutter_2020_f1/constants/app-constants.dart';
+import 'package:enc_flutter_2020_f1/payments/payment-options.dart';
 import 'package:enc_flutter_2020_f1/payments/razorpay.dart';
+import 'package:enc_flutter_2020_f1/profile/add-user-addresses.dart';
+import 'package:enc_flutter_2020_f1/profile/user-addresses.dart';
 import 'package:enc_flutter_2020_f1/util/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:enc_flutter_2020_f1/model/order.dart';
 
 class DishCartPage extends StatefulWidget {
+
+
+
   @override
   _DishCartPageState createState() => _DishCartPageState();
 }
@@ -15,9 +21,14 @@ class _DishCartPageState extends State<DishCartPage> {
 
   FirebaseFirestore db = FirebaseFirestore.instance;
 
+  String payment = "Cash On Delivery";
+  String address = "Address";
+  int paymentIndex = 0;
+
+  Order order = Order();
+
   placeOrder(List<Map<String, dynamic>> dishes){
 
-    Order order = Order();
     order.orderID = Utils.UID+"-"+DateTime.now().toString();
     order.userID = Utils.UID;
     order.restaurantID = dishes[0]['restaurantId'];
@@ -30,7 +41,6 @@ class _DishCartPageState extends State<DishCartPage> {
     }
 
     order.dishes = dishes;
-
 
     db.collection(Constants.ORDERS_COLLECTION).add(order.toMap()).then((value){
 
@@ -63,7 +73,7 @@ class _DishCartPageState extends State<DishCartPage> {
 
   @override
   Widget build(BuildContext context) {
-    FirebaseFirestore db = FirebaseFirestore.instance;
+
     CollectionReference collectionRestaurants = db.collection(Constants.USERS_COLLECTION).doc(Utils.UID).collection(Constants.CART_COLLECTION);
 
     int amount = 0;
@@ -116,34 +126,88 @@ class _DishCartPageState extends State<DishCartPage> {
               );
             }).toList(),
           );
-
         },
       ),
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: RaisedButton(
-          child: Text("CONFIRM ORDER"),
-          onPressed: () async{
-            String message = await Navigator.push(context, MaterialPageRoute(builder: (context) => RazorPayCheckoutPage(amount: amount),));
 
-            if(message.contains("SUCCESS")){
-              placeOrder(dishes);
-            }else if(message.contains("WALLET")){
-              placeOrder(dishes);
-            }else{
-              Fluttertoast.showToast(
-                  msg: "Something Went Wrong: "+message,
-                  toastLength: Toast.LENGTH_SHORT,
-                  gravity: ToastGravity.BOTTOM,
-                  timeInSecForIosWeb: 3,
-                  backgroundColor: Colors.red,
-                  textColor: Colors.white,
-                  fontSize: 16.0
-              );
-            }
-          }
-        ),
-      ),
+      bottomNavigationBar: Container(
+        height: 150,
+        padding: EdgeInsets.all(8.0),
+        child: Card(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(address),
+                RaisedButton(
+                  child: Text("SELECT ADDRESS"),
+                  onPressed: () async{
+                    Map<String, dynamic> adrs = await Navigator.push(context, MaterialPageRoute(builder: (context) => UserAdressesPage(),));
+                    setState(() {
+                      address = adrs['label'];
+                      order.deliveryAddress = adrs;
+                    });
+                  },
+                )
+              ],
+            ),
+            Padding(padding: EdgeInsets.all(2.0),),
+            Divider(),
+            Padding(padding: EdgeInsets.all(2.0),),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                FlatButton(
+                  child: Text(payment, style: TextStyle(color: Colors.amber),),
+                  onPressed: () async{
+                    Map<String, dynamic> paymentOption = await Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentOptionsPage(),));
+                    setState(() {
+                      payment = paymentOption['option'];
+                      paymentIndex = paymentOption['index'];
+                      order.paymentOption = payment;
+                    });
+                  },
+                ),
+                RaisedButton(
+                    child: Text("PLACE ORDER >"),
+                    onPressed: () async{
+
+                      if(paymentIndex == 0){
+
+                      }else if(paymentIndex == 1 || paymentIndex == 2 || paymentIndex == 3){
+                        String message = await Navigator.push(context, MaterialPageRoute(builder: (context) => RazorPayCheckoutPage(amount: amount),));
+
+                        if(message.contains("SUCCESS")){
+                          placeOrder(dishes);
+                        }else if(message.contains("WALLET")){
+                          placeOrder(dishes);
+                        }else{
+                          Fluttertoast.showToast(
+                              msg: "Something Went Wrong: "+message,
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIosWeb: 3,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0
+                          );
+                        }
+                      }else if(paymentIndex == 4){
+
+                      }else if(paymentIndex == 5){
+
+                      }else if(paymentIndex == 6){
+
+                      }
+                    }
+                ),
+              ],
+            )
+          ],
+        )
+      )
+      )
     );
   }
 }

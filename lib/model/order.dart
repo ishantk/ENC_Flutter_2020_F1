@@ -7,6 +7,8 @@ class Order {
   String restaurantID;
   DateTime orderDateTime;
   int totalPrice;
+  Map<String, dynamic> deliveryAddress;
+  String paymentOption;
   List<Map<String, dynamic>> dishes;
 
   Order();
@@ -19,6 +21,8 @@ class Order {
       "restaurantID": this.restaurantID,
       "orderDateTime": this.orderDateTime,
       "totalPrice": this.totalPrice,
+      "deliveryAddress": this.deliveryAddress,
+      "paymentOption": this.paymentOption,
       "dishes": this.dishes
     };
   }
