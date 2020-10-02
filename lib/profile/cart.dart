@@ -4,6 +4,7 @@ import 'package:enc_flutter_2020_f1/payments/payment-options.dart';
 import 'package:enc_flutter_2020_f1/payments/razorpay.dart';
 import 'package:enc_flutter_2020_f1/profile/add-user-addresses.dart';
 import 'package:enc_flutter_2020_f1/profile/user-addresses.dart';
+import 'package:enc_flutter_2020_f1/restaurant/counter.dart';
 import 'package:enc_flutter_2020_f1/util/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -22,7 +23,7 @@ class _DishCartPageState extends State<DishCartPage> {
   FirebaseFirestore db = FirebaseFirestore.instance;
 
   String payment = "Cash On Delivery";
-  String address = "Address";
+  String address = "Default Address";
   int paymentIndex = 0;
 
   Order order = Order();
@@ -137,10 +138,10 @@ class _DishCartPageState extends State<DishCartPage> {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Text(address),
-                RaisedButton(
+                OutlineButton(
                   child: Text("SELECT ADDRESS"),
                   onPressed: () async{
                     Map<String, dynamic> adrs = await Navigator.push(context, MaterialPageRoute(builder: (context) => UserAdressesPage(),));
@@ -156,9 +157,9 @@ class _DishCartPageState extends State<DishCartPage> {
             Divider(),
             Padding(padding: EdgeInsets.all(2.0),),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                FlatButton(
+                OutlineButton(
                   child: Text(payment, style: TextStyle(color: Colors.amber),),
                   onPressed: () async{
                     Map<String, dynamic> paymentOption = await Navigator.push(context, MaterialPageRoute(builder: (context) => PaymentOptionsPage(),));
@@ -169,7 +170,7 @@ class _DishCartPageState extends State<DishCartPage> {
                     });
                   },
                 ),
-                RaisedButton(
+                OutlineButton(
                     child: Text("PLACE ORDER >"),
                     onPressed: () async{
 
@@ -208,68 +209,6 @@ class _DishCartPageState extends State<DishCartPage> {
         )
       )
       )
-    );
-  }
-}
-
-class Counter extends StatefulWidget {
-
-  int quantity;
-  int dishPrice;
-  String docId;
-
-  Counter({Key key, @required this.quantity, @required this.dishPrice, @required this.docId}) : super(key: key);
-
-  @override
-  _CounterState createState() => _CounterState();
-}
-
-class _CounterState extends State<Counter> {
-
-  FirebaseFirestore db = FirebaseFirestore.instance;
-  
-  updateDishQuantityInFirestore(){
-    CollectionReference cart = db.collection(Constants.USERS_COLLECTION).doc(Utils.UID).collection(Constants.CART_COLLECTION);
-    cart.doc(widget.docId).update({"quantity": widget.quantity, "totalPrice":widget.quantity*widget.dishPrice}).then((value) {
-      // show some snackbar for update
-    });
-
-  }
-  
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          FlatButton(
-            child: Text('-', style: TextStyle(fontSize: 20.0),),
-            onPressed: (){
-              setState(() {
-                if(widget.quantity>1){
-                  widget.quantity -= 1;
-                  updateDishQuantityInFirestore();
-                }
-              });
-            },
-          ),
-          Padding(padding: EdgeInsets.all(2.0),),
-          Text('${widget.quantity}', style: TextStyle(fontSize: 20.0),),
-          Padding(padding: EdgeInsets.all(2.0),),
-          FlatButton(
-            child: Text('+', style: TextStyle(fontSize: 20.0),),
-            onPressed: (){
-              setState(() {
-              if(widget.quantity<10) {
-                widget.quantity += 1;
-                updateDishQuantityInFirestore();
-              }
-              });
-            },
-          )
-        ],
-      ),
     );
   }
 }

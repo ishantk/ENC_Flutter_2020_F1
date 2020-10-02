@@ -11,9 +11,14 @@ class RestaurantsHomePage extends StatefulWidget {
 
 class _RestaurantsHomePageState extends State<RestaurantsHomePage> {
 
-  HomeFilters _homeFilters = HomeFilters();
-  HomePageSlider _homePageSlider = HomePageSlider();
-  RestaurantPage _restaurantPage = RestaurantPage();
+  String filter = "";
+
+  implementFiltersAndRefreshUI(String data){
+    setState((){
+      filter = data;
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +27,13 @@ class _RestaurantsHomePageState extends State<RestaurantsHomePage> {
       padding: EdgeInsets.all(16.0),
       children: [
         Container(
-          child: _homeFilters,
+          child: HomeFilters(update: implementFiltersAndRefreshUI,),
           height: 80.0,
         ),
         Padding(padding: EdgeInsets.all(16.0),),
-        _homePageSlider,
+        HomePageSlider(),
         Padding(padding: EdgeInsets.all(16.0),),
-        _restaurantPage
+        RestaurantPage(filter: filter,)
       ],
     );
   }

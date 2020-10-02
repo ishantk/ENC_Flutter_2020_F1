@@ -35,5 +35,9 @@ class Constants{
 
   static const PAYMENT_OPTIONS_DOC = "payment-options";
 
+  static const TAG1 = "top5";
+  static const TAG2 = "trending";
+  static const TAG3 = "pizza";
+
 
 }

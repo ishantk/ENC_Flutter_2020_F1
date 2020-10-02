@@ -4,20 +4,32 @@ import 'package:enc_flutter_2020_f1/restaurant/menu.dart';
 import 'package:flutter/material.dart';
 
 class RestaurantPage extends StatefulWidget {
+
+  String filter = "";
+
+  RestaurantPage({Key key, this.filter}): super(key: key);
+
   @override
   _RestaurantPageState createState() => _RestaurantPageState();
 }
 
 class _RestaurantPageState extends State<RestaurantPage> {
 
+  FirebaseFirestore db = FirebaseFirestore.instance;
+
+  fetchFilteredRestaurants(){
+    if(widget.filter.isEmpty) {
+      return db.collection(Constants.RESTAURANT_COLLECTION).snapshots(); // All the Restaurants
+    } else{
+      return db.collection(Constants.RESTAURANT_COLLECTION).where("tags", arrayContains:widget.filter).snapshots(); // As per the filter
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
 
-    FirebaseFirestore db = FirebaseFirestore.instance;
-    CollectionReference collectionRestaurants = db.collection(Constants.RESTAURANT_COLLECTION);
-
     return StreamBuilder<QuerySnapshot>(
-        stream: collectionRestaurants.snapshots(),
+        stream: fetchFilteredRestaurants(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
 
           if(snapshot.hasError){

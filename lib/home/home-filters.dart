@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class HomeFilters extends StatefulWidget {
+
+  Function(String) update;
+
+  HomeFilters({Key key, this.update}): super(key: key);
+
   @override
   _HomeFiltersState createState() => _HomeFiltersState();
 }
@@ -21,7 +26,7 @@ class _HomeFiltersState extends State<HomeFilters> {
             children: [
               RaisedButton(
                 child: Text(
-                  "Vegetarian", style: TextStyle(fontSize: 18.0,),
+                  Constants.TAG1, style: TextStyle(fontSize: 18.0,),
                 ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(24.0),
@@ -29,13 +34,13 @@ class _HomeFiltersState extends State<HomeFilters> {
                 ),
                 color: Colors.white,
                 onPressed: (){
-
+                  widget.update(Constants.TAG1);
                 },
               ),
               Padding(padding: EdgeInsets.all(6.0),),
               RaisedButton(
                 child: Text(
-                  "Non Vegetarian", style: TextStyle(fontSize: 18.0,),
+                  Constants.TAG2, style: TextStyle(fontSize: 18.0,),
                 ),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(24.0),
@@ -43,13 +48,13 @@ class _HomeFiltersState extends State<HomeFilters> {
                 ),
                 color: Colors.white,
                 onPressed: (){
-
+                  widget.update(Constants.TAG2);
                 },
               ),
               Padding(padding: EdgeInsets.all(6.0),),
               RaisedButton(
                 child: Text(
-                  "Trending", style: TextStyle(fontSize: 18.0,),
+                  Constants.TAG3, style: TextStyle(fontSize: 18.0,),
                 ),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(24.0),
@@ -57,21 +62,7 @@ class _HomeFiltersState extends State<HomeFilters> {
                 ),
                 color: Colors.white,
                 onPressed: (){
-
-                },
-              ),
-              Padding(padding: EdgeInsets.all(6.0),),
-              RaisedButton(
-                child: Text(
-                  "Top5", style: TextStyle(fontSize: 18.0,),
-                ),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(24.0),
-                    side: BorderSide(color: Colors.blueGrey)
-                ),
-                color: Colors.white,
-                onPressed: (){
-
+                  widget.update(Constants.TAG3);
                 },
               ),
               Padding(padding: EdgeInsets.all(6.0),),
