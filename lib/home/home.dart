@@ -1,4 +1,5 @@
 import 'package:enc_flutter_2020_f1/home/restaurants-home.dart';
+import 'package:enc_flutter_2020_f1/home/search-restaurants.dart';
 import 'package:enc_flutter_2020_f1/profile/cart.dart';
 import 'package:enc_flutter_2020_f1/profile/user-profile.dart';
 import 'package:enc_flutter_2020_f1/restaurant/restaurant-list.dart';
@@ -16,8 +17,7 @@ class _HomePageState extends State<HomePage>{
     // 0
     RestaurantsHomePage(),
     // 1
-    Text("Search Something",
-      style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold, fontStyle: FontStyle.italic),),
+   RestaurantSearchWidget(),
     // 2
    UserProfilePage()
   ];

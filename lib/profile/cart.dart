@@ -12,8 +12,6 @@ import 'package:enc_flutter_2020_f1/model/order.dart';
 
 class DishCartPage extends StatefulWidget {
 
-
-
   @override
   _DishCartPageState createState() => _DishCartPageState();
 }
@@ -107,7 +105,48 @@ class _DishCartPageState extends State<DishCartPage> {
               amount += document.data()['totalPrice'];
               dishes.add(document.data());
 
-              return Card(
+              return Expanded(
+                  child: Card(
+                      elevation: 2,
+                      child: Padding(
+                        padding: EdgeInsets.all(4.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: 100,
+                              width: 100,
+                              padding: EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  image: DecorationImage(
+                                      image: NetworkImage(document.data()['imageURL']),
+                                      fit: BoxFit.cover
+                                  )
+                              ),
+                            ),
+                            Padding(padding: EdgeInsets.all(2.0),),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(document.data()['title'], style: TextStyle(fontSize: 16.0, color: Colors.amber),),
+                                Text(document.data()['totalPrice'].toString(), style: TextStyle(fontSize: 12.0, color: Colors.black),),
+                                Text(document.data()['quantity'].toString(), style: TextStyle(fontSize: 12.0, color: Colors.blueGrey),),
+                                Text(document.data()['description'], style: TextStyle(fontSize: 12.0, color: Colors.blueGrey),),
+                                Text(document.data()['type'], style: TextStyle(fontSize: 12.0, color: Colors.blueGrey),),
+                                Padding(padding: EdgeInsets.all(4.0),),
+                              ],
+                            ),
+                            Counter(quantity: document.data()['quantity'], dishPrice: document.data()['price'], docId: document.id),
+                          ],
+                        ),
+                      )
+                  )
+              );
+
+              /*return Card(
                 child: Container(
                   padding: EdgeInsets.all(8.0),
                   child: Column(
@@ -124,7 +163,7 @@ class _DishCartPageState extends State<DishCartPage> {
                     ],
                   ),
                 ),
-              );
+              );*/
             }).toList(),
           );
         },
