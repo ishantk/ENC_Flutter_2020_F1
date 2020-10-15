@@ -3,15 +3,25 @@
 //import 'package:enc_flutter_2020_f1/tutorials/capture-image.dart';
 //import 'package:flutter/cupertino.dart';
 
+import 'package:enc_flutter_2020_f1/tutorials/provider-for-state-management.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import 'package:enc_flutter_2020_f1/auth/food-delivery-app.dart';
+import 'package:provider/provider.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(); // This is new implementation from Firebase
-  runApp(FoodDeliveryApp());
+  //runApp(FoodDeliveryApp());
+
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => Counter(), // Construct the Objects when we run the App
+      child: MyApp(),
+    )
+  );
+
 }
 
 /*void main() {
