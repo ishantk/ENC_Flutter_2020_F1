@@ -32,6 +32,7 @@ class _DishCartPageState extends State<DishCartPage> {
     order.userID = Utils.UID;
     order.restaurantID = dishes[0]['restaurantId'];
     order.orderDateTime = DateTime.now();
+    order.orderState = 1; // 1 -> order in action | 2 -> order accepted by restaurant | 3 -> order picked by delivery agent | 4 -> order delivered to customer
 
     order.totalPrice = 0;
 

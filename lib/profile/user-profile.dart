@@ -118,7 +118,7 @@ class _UserProfilePageState extends State<UserProfilePage> {
           subtitle: Text("All the Orders History"),
           trailing: Icon(Icons.keyboard_arrow_right),
           onTap: (){
-
+            Navigator.pushNamed(context, "/user-orders");
           },
         ),
         ListTile(
@@ -134,15 +134,6 @@ class _UserProfilePageState extends State<UserProfilePage> {
           leading: Icon(Icons.import_contacts),
           title: Text("Terms & Conditions", style: TextStyle(color: Colors.blueGrey, fontSize: 18.0),),
           subtitle: Text("We are transparent with what we do"),
-          trailing: Icon(Icons.keyboard_arrow_right),
-          onTap: (){
-
-          },
-        ),
-        ListTile(
-          leading: Icon(Icons.help),
-          title: Text("Help & Assist", style: TextStyle(color: Colors.blueGrey, fontSize: 18.0),),
-          subtitle: Text("FAQ's about the App and Usage"),
           trailing: Icon(Icons.keyboard_arrow_right),
           onTap: (){
 

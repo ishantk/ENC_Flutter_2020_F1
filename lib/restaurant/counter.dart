@@ -29,6 +29,13 @@ class _CounterState extends State<Counter> {
     });
   }
 
+  removeDishFromCartInFirestore(){
+    CollectionReference cart = db.collection(Constants.USERS_COLLECTION).doc(Utils.UID).collection(Constants.CART_COLLECTION);
+    cart.doc(widget.docId).delete().then((value){
+      Fluttertoast.showToast(msg: "Dish Removed",);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -47,10 +54,15 @@ class _CounterState extends State<Counter> {
               child: Icon(Icons.remove, size: 16.0,),
               onTap: (){
                 setState(() {
-                  if(widget.quantity>1){
+                  if(widget.quantity>0){
                     widget.quantity -= 1;
                     updateDishQuantityInFirestore();
                   }
+
+                  if(widget.quantity == 0){
+                    removeDishFromCartInFirestore();
+                  }
+
                 });
               },
             ),

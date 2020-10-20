@@ -14,7 +14,7 @@ import 'package:provider/provider.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(); // This is new implementation from Firebase
-  //runApp(FoodDeliveryApp());
+  runApp(FoodDeliveryApp());
 
   /*runApp(
     ChangeNotifierProvider(
@@ -23,7 +23,7 @@ void main() async{
     )
   );*/
 
-  runApp(MyFoodMenuApp());
+  //runApp(MyFoodMenuApp());
 
 }
 

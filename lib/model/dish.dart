@@ -1,27 +1,34 @@
 
 class Dish{
 
-  String name="";
-  String description="";
-  String imageURL="";
-  double price=0;
-  double discount=0;
-
-  // default all the variables will have null
-  List<String> types; // for filtering the dishes for our search operation in app
+  String description;
+  String imageURL;
+  double price;
+  double quantity;
+  String restaurant;
+  String restaurantId;
+  String title;
+  double totalPrice;
+  String type;
 
   Dish();
 
-  Dish.init({this.name, this.description, this.imageURL, this.price, this.discount, this.types});
+  Dish.init({this.description, this.imageURL, this.price, this.quantity, this.restaurant, this.restaurantId, this.title, this.totalPrice, this.type});
+  Dish.fromMap(Map <String, dynamic> map){
+    //....
+  }
 
   Map<String, dynamic> toMap(){
     return{
-      "name":name,
       "description": description,
       "imageURL":imageURL,
       "price": price,
-      "discount":discount,
-      "type": types
+      "quantity":quantity,
+      "restaurant":restaurant,
+      "restaurantId":restaurantId,
+      "title":title,
+      "totalPrice":totalPrice,
+      "type": type
     };
   }
 

@@ -10,9 +10,10 @@ class Order {
   Map<String, dynamic> deliveryAddress;
   String paymentOption;
   List<Map<String, dynamic>> dishes;
+  int orderState;
 
   Order();
-  Order.init({this.orderID, this.userID, this.restaurantID, this.orderDateTime, this.totalPrice, this.dishes});
+  Order.init({this.orderID, this.userID, this.restaurantID, this.orderDateTime, this.totalPrice, this.dishes, this.orderState});
 
   Map<String, dynamic> toMap(){
     return {
@@ -23,7 +24,8 @@ class Order {
       "totalPrice": this.totalPrice,
       "deliveryAddress": this.deliveryAddress,
       "paymentOption": this.paymentOption,
-      "dishes": this.dishes
+      "dishes": this.dishes,
+      "orderState": this.orderState
     };
   }
 

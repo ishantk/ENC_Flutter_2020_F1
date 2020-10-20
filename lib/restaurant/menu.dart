@@ -174,6 +174,7 @@ class _RestaurantDishesState extends State<RestaurantDishes> {
     return ListView.builder(
       itemCount: widget.restaurant['menu'].length,
       itemBuilder: (context, index) {
+
         return Expanded(
           child: Card(
               elevation: 2,
