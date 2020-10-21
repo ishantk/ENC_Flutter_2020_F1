@@ -2,6 +2,7 @@ import 'package:enc_flutter_2020_f1/home/restaurants-home.dart';
 import 'package:enc_flutter_2020_f1/home/search-restaurants.dart';
 import 'package:enc_flutter_2020_f1/profile/cart.dart';
 import 'package:enc_flutter_2020_f1/profile/user-profile.dart';
+import 'package:enc_flutter_2020_f1/restaurant/cart-provider.dart';
 import 'package:enc_flutter_2020_f1/restaurant/restaurant-list.dart';
 import 'package:flutter/material.dart';
 
@@ -17,9 +18,9 @@ class _HomePageState extends State<HomePage>{
     // 0
     RestaurantsHomePage(),
     // 1
-   RestaurantSearchWidget(),
+    RestaurantSearchWidget(),
     // 2
-   UserProfilePage()
+    UserProfilePage()
   ];
 
   // navItemClicked shall refresh the UI i.e. build the UI again with new value of Index

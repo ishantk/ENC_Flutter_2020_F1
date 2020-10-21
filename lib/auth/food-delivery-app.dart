@@ -21,7 +21,7 @@ class FoodDeliveryApp extends StatelessWidget{
     return MultiProvider(
       providers:[
         // we may have some data which needs to be updated/changed
-        ChangeNotifierProxyProvider(
+        ChangeNotifierProvider(
           create: (context) => FoodItemCart(),
         )
       ],

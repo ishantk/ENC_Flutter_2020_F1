@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enc_flutter_2020_f1/constants/app-constants.dart';
+import 'package:enc_flutter_2020_f1/model/cart.dart';
 import 'package:enc_flutter_2020_f1/profile/cart.dart';
 import 'package:enc_flutter_2020_f1/restaurant/counter.dart';
 import 'package:enc_flutter_2020_f1/util/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 // RestaurantMenuPage will re-fetch the data from the backend
 
@@ -174,7 +176,6 @@ class _RestaurantDishesState extends State<RestaurantDishes> {
     return ListView.builder(
       itemCount: widget.restaurant['menu'].length,
       itemBuilder: (context, index) {
-
         return Expanded(
           child: Card(
               elevation: 2,

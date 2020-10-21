@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enc_flutter_2020_f1/constants/app-constants.dart';
-import 'package:enc_flutter_2020_f1/restaurant/menu.dart';
+import 'package:enc_flutter_2020_f1/restaurant/menu-provider.dart';
+//import 'package:enc_flutter_2020_f1/restaurant/menu.dart';
 import 'package:flutter/material.dart';
 
 class RestaurantPage extends StatefulWidget {
@@ -79,7 +80,8 @@ class _RestaurantPageState extends State<RestaurantPage> {
                 ),
                 onTap: (){
                   //MaterialPageRoute route = MaterialPageRoute(builder: (context) => RestaurantMenuPage(restaurantId: document.id,),);
-                  MaterialPageRoute route = MaterialPageRoute(builder: (context) => RestaurantDishes(restaurant: document.data(), restaurantID: document.id),);
+                  //MaterialPageRoute route = MaterialPageRoute(builder: (context) => RestaurantDishes(restaurant: document.data(), restaurantID: document.id),);
+                  MaterialPageRoute route = MaterialPageRoute(builder: (context) => RestaurantMenuPage(restaurant: document.data(), restaurantID: document.id),);
                   Navigator.push(context, route);
                 },
               );
