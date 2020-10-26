@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:enc_flutter_2020_f1/model/dish.dart';
 
 class Order {
 
   String orderID;
+  int oID;
   String userID;
   String restaurantID;
   DateTime orderDateTime;
@@ -18,6 +20,7 @@ class Order {
   Map<String, dynamic> toMap(){
     return {
       "orderID": this.orderID,
+      "oID": FieldValue.increment(1), // Auto Increment to Order ID :)
       "userID": this.userID,
       "restaurantID": this.restaurantID,
       "orderDateTime": this.orderDateTime,

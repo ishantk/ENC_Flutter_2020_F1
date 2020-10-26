@@ -56,9 +56,7 @@ class _DishCartPageState extends State<DishCartPage> {
 
       // Initially Place the Order and afterwards clear the cart collection :)
       removeDishesFromCart();
-
     });
-
   }
 
   removeDishesFromCart(){
